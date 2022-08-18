@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The ActLang Programming Language | ActorBeam Community</title>
+<meta property="og:locale" content="en_US">
+<meta name="description" content="ActLang is a functional programming languge">
+<meta property="og:description" content="ActLang is a functional programming languge">
+<link rel="canonical" href="https://actlang.org/">
+<meta property="og:url" content="/">
+<meta property="og:site_name" content="ActLang">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="ActLang">
+
+
+    <link rel="stylesheet" href="./actlang/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">ActLang</h1>
+        <p class="header">ActLang</p>
+
+        <ul>
+          
+          <li><a class="buttons github" href="#0">View On GitHub</a></li>
+        </ul>
+        
+      </header>
+
+      <section>
+        <style>pre.highlight { line-height: 1.2em; max-height: 25em; overflow: scroll; }</style>
+
+<h1 id="what-does-exo-do">ActLang</h1>
+
+<p>ActLang is a functional programming language to build scalable & distributed applications for BEAM Virtual Machine. Inspired by Erlang’s process and Akka Toolkit’s Actor-based model. If you already know modern functional programming languages like Scala, Haskell, Clojure and somewhat Swift, its easier to get along with actlang.</p>
+
+<h1 id="background--motivation">Background &amp; Motivation</h1>
+
+<p>A Statically Typed language with all modern features to create stable, less error-prone applications for battle tested Erlang based systems. To make programming easeir for new developers by utilizing the features of functional programming like: Declarative Style ( what not how) , Functions are first class citizens ( higher-order functions), immutability, basic algebric data types</p>
+
+<p>Unlike other programming languages and compilers, ActLang is built around 
+the concept of <em>early-compilation</em>. Avoiding programmers to make bad logical mistakes.</p>
+
+
+<p>We have some talk sessions in plan. When a video of the talk is available,
+we will post it here!</p>
+
+<h1 id="getting-started">Getting Started</h1>
+
+<h2 id="setting-up">Setting up</h2>
+
+<p>Working with ActLang is easy! Install the actlang compiler for corresponding OS. currently MacOS (via homebrew) and Linux are the primary focus but compilation stuff for windows will soon be available. create a file with .act extension and you are ready to complile the code </p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight">
+  <code>$ brew install actlang
+</code></pre></div>
+</div>
+
+
+
+<h2 id="hello-exo">Hello World!</h2>
+
+<p>Let’s write a hello world program</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># hello.act
+
+  act Hello {
+    // all actions are defined here
+
+    func start() {
+        print("Hello World")
+    }
+  }
+</code></pre></div></div>
+
+<p>And now we can run the actlang compiler:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ actlang hello.act
+$ Hello.start()
+$ Hello World
+</code></pre></div></div>
+
+<p>A beam file is generated in the source directly. *.beam </p>
+<p>This beam file is used by BEAM VM to run the program. It is popular for its suitability to build low-latency, fault-tolerant, and distributed applications. </p>
+
+
+<p>Some of the language semantics are: </p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  // variables
+  val bookingId = "1102"
+  
+  // Functional programming language
+  // Functions are first class citizens
+  
+  val getBookingId(booking: Booking): String = {
+    booking.id
+  }
+  
+  private val getBookingId(booking: Booking): Int = {
+    if booking.available { booking.id.toInt }
+    else { 0 }
+  }
+  
+  // Higher-Order Functions
+  val caps = getBookingId(booking: Booking).upperCase()
+  
+  
+  //Generic functions with possible outcomes
+  func getBookingDate(booking: Booking): Either[R&lt;T&gt;, Error] {
+    ...
+  }
+  
+  // Structuers for Data Models
+  
+  struct Booking {
+    val id: String
+  }
+  
+  // immutability 
+  no var variable
+  no reassigments
+  
+  // Asynchrounous operations
+  
+  async {
+    dosomthing in a different thread
+  }
+  
+  // structured concurrency pattern
+  // wait for future result
+  
+  async {
+    val result = await doSomething()
+  }
+  
+
+  // function to evaluate some result in future
+  func doSomething() async {
+    
+  }
+  
+  // multiple async operations in parallel
+  async {
+    async val result = doSomething()
+    async val result2 = doSomething2()
+    val combine = await[result, result2]
+  }
+  
+</code></pre></div></div>
+
+
+<h1 id="is-exo-right-for-me">Is ActLang Right for Me?</h1>
+
+<ol>
+  <li>Are you want to create highly distributed applications without worrying about concurrency</li>
+  <li>Are you targeting high performance systems</li>
+  <li>Do you need a language to simplify writing complex problems. Integrated with all the modern features of functional stuff</li>
+</ol>
+
+<p>If you answered “yes!”, then ActLang might be right for you!</p>
+
+<p>In particular, if you want to work with a large number of independent process unit without sharing state
+
+</br>
+  Advantages Of Functional Programming:</br>
+Here are some of the benefits of functional programming that are admired by developers. </br>
+<ol>
+  <li>Shorter code</li>
+<li>Easy debugging</li>
+<li>Modular</li>
+<li>Parallel programming</li>
+<li>Increased maintainability</li>
+<li>Code readability</li>
+  </ol>
+
+Many functional programming languages are in use today in many industries. Actlang purpose is to make this paradigm easier for distribute computing as a general programming language from students to professionals
+
+
+</p>
+
+<h1 id="-under-construction-">🚧 Under Construction! 🚧</h1>
+
+<p>ActLang is a young research project and under active development. Here 
+are some of the things we’d like to add / Act (or perhaps continue to learn & explore).</p>
+
+<ol>
+  <li>
+    Efficient and simpler way to write multithreaded & non-blocking code.
+  </li>
+  <li>Most appreciateable features from other programming lanaugaes that help us to write better code</li>
+  <li>Minimize the compile time, in parallel to show human-readable errors for faster debugging </li>
+</ol>
+
+<h1 id="publications--learning-more">Publications &amp; Learning More</h1>
+
+<p>So far, we are going to publish papers & articles on ActLang to get early feedback</p>
+
+
+
+      </section>
+
+      <footer>
+        <p><small>Soon Hosted on <a href="#0">GitHub Pages</a> using the ActorBeam Community Channel</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  
+
+</body></html>
