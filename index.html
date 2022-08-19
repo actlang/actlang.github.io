@@ -23,12 +23,10 @@
     <![endif]-->
     <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
 
-<!-- Setup Google Analytics -->
-
 
 
 <!-- You can set your favicon here -->
-<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+<link rel="shortcut icon" type="image/x-icon" href="./actlang/actlang-favicon.ico">
 
 <!-- end custom head snippets -->
 
@@ -37,11 +35,11 @@
     <div class="wrapper">
       <header>
         <h1 class="header">ActLang</h1>
-        <p class="header">ActLang</p>
+        <p class="header">Actor Beam Community</p>
 
         <ul>
           
-          <li><a class="buttons github" href="#0">View On GitHub</a></li>
+          <li><a class="buttons github" href="https://github.com/actlang">GitHub</a></li>
         </ul>
         
       </header>
@@ -51,11 +49,13 @@
 
 <h1 id="what-does-exo-do">ActLang</h1>
 
-<p>ActLang is a functional programming language to build scalable & distributed applications for BEAM Virtual Machine. Inspired by Erlang’s process and Akka Toolkit’s Actor-based model. If you already know modern functional programming languages like Scala, Haskell, Clojure and somewhat Swift, its easier to get along with actlang.</p>
+<p>ActLang is a modern functional programming language to build highly distributed applications for BEAM Virtual Machine. Inspired by Erlang's process and Akka Toolkit's Actor-based concurrency model. Actlang is a general-purpose language that makes programming fun and simpler from learning to building enterprise-grade solutions. If you are already familiar with FP paradigm for languages like Haskell, Clojure, Scala e.g, you found actlang easier to start with</p>
 
 <h1 id="background--motivation">Background &amp; Motivation</h1>
 
-<p>A Statically Typed language with all modern features to create stable, less error-prone applications for battle tested Erlang based systems. To make programming easeir for new developers by utilizing the features of functional programming like: Declarative Style ( what not how) , Functions are first class citizens ( higher-order functions), immutability, basic algebric data types</p>
+<p>A Statically Typed language with all modern features to create stable, less error-prone applications for battle tested Erlang based systems. To make programming easeir for new developers by utilizing the features of functional programming like: </br> Declarative Style ( what, not how) , Functions as first class citizens ( higher-order functions, transformations), immutability, basic algebric data types e.g.</p>
+
+<p>Another goal of actlang is to provide a fantastic developer experience. Simply put, developers should be both highly productive and experience joy when programming. Making them free from the major problem of concurrency: "Shared Mutable State", to build a fault-tolerant system that supports the paradigm: "Let It Crash"</p>
 
 <p>Unlike other programming languages and compilers, ActLang is built around 
 the concept of <em>early-compilation</em>. Avoiding programmers to make bad logical mistakes.</p>
@@ -68,10 +68,11 @@ we will post it here!</p>
 
 <h2 id="setting-up">Setting up</h2>
 
-<p>Working with ActLang is easy! Install the actlang compiler for corresponding OS. currently MacOS (via homebrew) and Linux are the primary focus but compilation stuff for windows will soon be available. create a file with .act extension and you are ready to complile the code </p>
+<p>Working with ActLang is easy! Install the actlang compiler for corresponding OS. currently Unix-based operating systems are the primary focus: MacOS (via homebrew), Linux e.g, but compilation stuff for windows will soon be available. create a file with .act extension and you are ready to complile the code </p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight">
-  <code>$ brew install actlang
+  <code>$ brew install erlang
+  $ brew install actlang
 </code></pre></div>
 </div>
 
@@ -92,7 +93,7 @@ we will post it here!</p>
   }
 </code></pre></div></div>
 
-<p>And now we can run the actlang compiler:</p>
+<p>And now we can run the program using actlang compiler:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ actlang hello.act
 $ Hello.start()
@@ -106,11 +107,65 @@ $ Hello World
 <p>Some of the language semantics are: </p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  // variables
-  val bookingId = "1102"
+  // variables - type inference
+  val x = 1
+  > x: Int = 1
+
+  // immutability at the core of the language
+  x = 2
+  > error: reassigments to an immutable varible x
+
+  // functions are first class citizens
+  val areaRectangle(width: Int, height: Int): Int = width * height
+
+  val area = areaRectangle(width: 10, height: 12)
+  > 120
+
+  // funcitons that don't return anything
+  func doSomething() {
+      print("some task...")
+  }
+
+  // higher-order functions
+  val transform(arr: [Int]): [Int] = {
+      arr.map(x -> x + 1)
+  }
+
+  > [1, 2, 3] => [2, 3, 4]
+
+
+  // Asynchrounous operations
+
+  async {
+    dosomthing in a different thread / process
+  }
+
+  // function to evaluate some result in future
+  func doSomething() async {
+    ...
+  }
   
-  // Functional programming language
-  // Functions are first class citizens
+  // structured concurrency pattern  
+  async {
+    val result = await doSomething()
+  }
+  
+  // multiple async operations in parallel
+  async {
+    async val result1 = doSomething1()
+    async val result2 = doSomething2()
+    val combine = await[result, result2]
+  }
+
+
+  // Structuers for Data Models
+  
+  struct Booking {
+    val id: String,
+    val available: Bool = false
+  }
+
+  val booking = Booking(id: "1122")
   
   val getBookingId(booking: Booking): String = {
     booking.id
@@ -121,8 +176,7 @@ $ Hello World
     else { 0 }
   }
   
-  // Higher-Order Functions
-  val caps = getBookingId(booking: Booking).upperCase()
+  val id = getBookingId(booking: Booking).toInt()
   
   
   //Generic functions with possible outcomes
@@ -130,42 +184,8 @@ $ Hello World
     ...
   }
   
-  // Structuers for Data Models
-  
-  struct Booking {
-    val id: String
-  }
-  
-  // immutability 
-  no var variable
-  no reassigments
-  
-  // Asynchrounous operations
-  
-  async {
-    dosomthing in a different thread
-  }
-  
-  // structured concurrency pattern
-  // wait for future result
-  
-  async {
-    val result = await doSomething()
-  }
   
 
-  // function to evaluate some result in future
-  func doSomething() async {
-    
-  }
-  
-  // multiple async operations in parallel
-  async {
-    async val result = doSomething()
-    async val result2 = doSomething2()
-    val combine = await[result, result2]
-  }
-  
 </code></pre></div></div>
 
 
@@ -220,7 +240,7 @@ are some of the things we’d like to add / Act (or perhaps continue to learn & 
       </section>
 
       <footer>
-        <p><small>Soon Hosted on <a href="#0">GitHub Pages</a> using the ActorBeam Community Channel</small></p>
+        <p><small>Soon Hosted on <a href="https://github.com/actlang">GitHub</a> </br> </small>ActorBeam Community</small></p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
