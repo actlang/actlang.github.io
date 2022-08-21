@@ -107,7 +107,7 @@ $ Hello World
 <p>Some of the language semantics are: </p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  // variables - type inference
+  // variables ( so called values ) - type inference
   val x = 1
   > x: Int = 1
 
@@ -116,10 +116,10 @@ $ Hello World
   > error: reassigments to an immutable varible x
 
   // functions are first class citizens
-  val areaRectangle(width: Int, height: Int): Int = width * height
 
+  val areaRectangle(width: Int, height: Int): Int = width * height
   val area = areaRectangle(width: 10, height: 12)
-  > 120
+  > area: 120: Int
 
   // funcitons that don't return anything
   func doSomething() {
@@ -135,16 +135,14 @@ $ Hello World
 
 
   // Hashmap
-  val keyValuePairs = ["key": "value"]
+  val keyValuePairs = ["key1": "value1", "key2": "value2"]
 
 
-  // Custom types, compositions, Algerbric data types:  AND , OR
+  // Custom types, compositions, Algerbric data types (Sum & Product): OR, AND
 
-  type CheckNumber: Int
-  type CardNumber: String
+  type PaymentAmount: Float
   type CardType = Visa | Mastercard
   type Currency = EUR | USD
-  type PaymentAmount: Float
 
   type Payment {
       amount: PaymentAmount,
@@ -154,6 +152,17 @@ $ Hello World
 
 
   val payment: Payment = (amount: 50.5, currency: Currency.USD, cardType: CardType.Mastercard)
+
+  // No Global State
+
+  val someValue = 10
+  func calculate() {
+      val x = someValue
+  }
+
+  > error: global state found for variable someValue. variable scope should be defined inside a function
+
+
 
   // Asynchrounous operations
 
@@ -198,12 +207,12 @@ $ Hello World
   <li>Do you need a language to simplify writing complex problems. Integrated with all the modern features of functional stuff</li>
 </ol>
 
-<p>If you answered “yes!”, then ActLang might be right for you!</p>
-
-<p>In particular, if you want to work with a large number of independent process unit without sharing state
+<p>If you answered “yes!”, then ActLang might be right for you!</br>
+In particular, if you want to work with a large number of independent process unit without sharing state
+</p>
 
 </br>
-  Advantages Of Functional Programming:</br>
+  <p>Advantages Of Functional Programming:</br>
 Here are some of the benefits of functional programming that are admired by developers. </br>
 <ol>
   <li>Shorter code</li>
@@ -213,6 +222,8 @@ Here are some of the benefits of functional programming that are admired by deve
 <li>Increased maintainability</li>
 <li>Code readability</li>
   </ol>
+
+  </p>
 
 Many functional programming languages are in use today in many industries. Actlang purpose is to make this paradigm easier for distribute computing as a general programming language from students to professionals
 
