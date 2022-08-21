@@ -68,7 +68,7 @@ we will post it here!</p>
 
 <h2 id="setting-up">Setting up</h2>
 
-<p>Working with ActLang is easy! Install the actlang compiler for corresponding OS. currently Unix-based operating systems are the primary focus: MacOS (via homebrew), Linux e.g, but compilation stuff for windows will soon be available. create a file with .act extension and you are ready to complile the code </p>
+<p>Working with ActLang is easy! We have to first install Erlang on our system as aclang utilize underlying Beam compiler. Install the actlang compiler for corresponding OS. currently Unix-based operating systems are the primary focus: MacOS (via homebrew), Linux e.g, but compilation stuff for windows will soon be available. create a file with .act extension and you are ready to complile the code </p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight">
   <code>$ brew install erlang
@@ -119,7 +119,7 @@ $ Hello World
 
   val areaRectangle(width: Int, height: Int): Int = width * height
   val area = areaRectangle(width: 10, height: 12)
-  > area: 120: Int
+  > area: Int = 120
 
   // funcitons that don't return anything
   func doSomething() {
@@ -184,13 +184,13 @@ $ Hello World
   async {
     async val result1 = doSomething1()
     async val result2 = doSomething2()
-    val combine = await[result, result2]
+    val combine = await[result1, result2]
   }
 
   
   
   //Generic functions with possible outcomes
-  func getBookingDate(booking: Booking): Either[R&lt;T&gt;, Error] {
+  func getBookingDate&lt;T&gt;(booking: Booking): Either[R&lt;T&gt;, Error] {
     ...
   }
   
@@ -225,7 +225,7 @@ Here are some of the benefits of functional programming that are admired by deve
 
   </p>
 
-Many functional programming languages are in use today in many industries. Actlang purpose is to make this paradigm easier for distribute computing as a general programming language from students to professionals
+Many functional programming languages are in use today in many industries. Actlang purpose is to make this paradigm easier for distributed computing as a general programming language from students to professionals
 
 
 </p>
