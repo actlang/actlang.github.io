@@ -134,6 +134,27 @@ $ Hello World
   > [1, 2, 3] => [2, 3, 4]
 
 
+  // Hashmap
+  val keyValuePairs = ["key": "value"]
+
+
+  // Custom types, compositions, Algerbric data types:  AND , OR
+
+  type CheckNumber: Int
+  type CardNumber: String
+  type CardType = Visa | Mastercard
+  type Currency = EUR | USD
+  type PaymentAmount: Float
+
+  type Payment {
+      amount: PaymentAmount,
+      currency: Currency,
+      cardType: CardType
+  }
+
+
+  val payment: Payment = (amount: 50.5, currency: Currency.USD, cardType: CardType.Mastercard)
+
   // Asynchrounous operations
 
   async {
@@ -157,26 +178,6 @@ $ Hello World
     val combine = await[result, result2]
   }
 
-
-  // Structuers for Data Models
-  
-  struct Booking {
-    val id: String,
-    val available: Bool = false
-  }
-
-  val booking = Booking(id: "1122")
-  
-  val getBookingId(booking: Booking): String = {
-    booking.id
-  }
-  
-  private val getBookingId(booking: Booking): Int = {
-    if booking.available { booking.id.toInt }
-    else { 0 }
-  }
-  
-  val id = getBookingId(booking: Booking).toInt()
   
   
   //Generic functions with possible outcomes
