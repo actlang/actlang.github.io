@@ -4,17 +4,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>The ActLang Programming Language | ActorBeam Community</title>
+<title>Agentic AI In Action - ActLang Framework | AICampus Community</title>
 <meta property="og:locale" content="en_US">
-<meta name="description" content="ActLang is a functional programming languge">
+<meta name="description" content="ActLang is an AI Agent Framework">
 <meta property="og:description" content="ActLang is a functional programming languge">
 <link rel="canonical" href="https://actlang.org/">
-<meta property="og:title" content="ActLang is a modern functional programming language to build highly distributed & fault-tolerant applications">
+<meta property="og:title" content="An Action-First Framework for Building Autonomous AI Agents - An early-stage open-source Agentic framework designed to build highly scalable multi-agents system">
 <meta property="og:url" content="https://actlang.github.io/">
 <meta property="og:image" content="https://actlang.github.io/actlang/actlang-actor-beam-community.jpg">
 <meta property="og:site_name" content="ActLang">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="ActLang is a functional programming languge">
+<meta name="twitter:card" content="ActLang is an AI Agent Framework">
 <meta property="twitter:title" content="ActLang">
 
 
@@ -37,7 +37,7 @@
     <div class="wrapper">
       <header>
         <h1 class="header">ActLang</h1>
-        <p class="header">Actor Beam Community</p>
+        <p class="header">AICampus Community</p>
 
         <ul>
           
@@ -51,7 +51,7 @@
 
 <h1 id="what-does-exo-do">ActLang</h1>
 
-<p>ActLang is a modern functional programming language to build highly distributed applications for BEAM Virtual Machine. Inspired by Erlang's process and Akka Toolkit's Actor-based concurrency model. Actlang is a general-purpose language that makes programming fun and simpler from learning to building enterprise-grade solutions. If you are already familiar with FP paradigm for languages like Haskell, Clojure, Scala e.g, you found actlang easier to start with</p>
+<p>ActLang is an Action-First AI Agent Framework for Building Autonomous AI Agents. An early-stage open-source Agentic framework designed to build highly scalable multi-agents system. Its core is designed to build highly distributed applications for BEAM Virtual Machine. Inspired by Erlang's process and Akka Toolkit's Actor-based concurrency model. Actlang is an Agentic System that makes developing AI Agents, fun and simpler from learning to building enterprise-grade solutions. If you are already familiar with AI Applications, LLMs, and RAG, you found actlang easier to start with</p>
 
 <h1 id="background--motivation">Background &amp; Motivation</h1>
 
@@ -66,147 +66,13 @@ the concept of <em>early-compilation</em>. Avoiding programmers to make bad logi
 <p>We have some talk sessions in plan. When a video of the talk is available,
 we will post it here!</p>
 
-<h1 id="getting-started">Getting Started</h1>
-
-<h2 id="setting-up">Setting up</h2>
-
-<p>Working with ActLang is easy! We have to first install Erlang on our system as aclang utilize underlying Beam compiler. Install the actlang compiler for corresponding OS. currently Unix-based operating systems are the primary focus: MacOS (via homebrew), Linux e.g, but compilation stuff for windows will soon be available. create a file with .act extension and you are ready to complile the code </p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight">
-  <code>$ brew install erlang
-  $ brew install actlang
-</code></pre></div>
-</div>
-
-
-
-<h2 id="hello-exo">Hello World!</h2>
-
-<p>Let’s write a hello world program</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># hello.act
-
-  act Hello {
-    // all actions are defined here
-
-    func start() {
-        print("Hello World")
-    }
-  }
-</code></pre></div></div>
-
-<p>And now we can run the program using actlang compiler:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ actlang hello.act
-$ Hello.start()
-$ Hello World
-</code></pre></div></div>
-
-<p>A beam file is generated in the source directly. *.beam </p>
-<p>This beam file is used by BEAM VM to run the program. It is popular for its suitability to build low-latency, fault-tolerant, and distributed applications. </p>
-
-
-<p>Some of the language semantics are: </p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  // variables ( so called values ) - type inference
-  val x = 1
-  > x: Int = 1
-
-  // immutability at the core of the language
-  x = 2
-  > error: reassigments to an immutable varible x
-
-  // functions are first class citizens
-
-  val areaRectangle(width: Int, height: Int): Int = width * height
-  val area = areaRectangle(width: 10, height: 12)
-  > area: Int = 120
-
-  // funcitons that don't return anything
-  func doSomething() {
-      print("some task...")
-  }
-
-  // higher-order functions
-  val transform(arr: [Int]): [Int] = {
-      arr.map(x -> x + 1)
-  }
-
-  > [1, 2, 3] => [2, 3, 4]
-
-
-  // Hashmap
-  val keyValuePairs = ["key1": "value1", "key2": "value2"]
-
-
-  // Custom types, compositions, Algerbric data types (Sum & Product): OR, AND
-
-  type PaymentAmount: Float
-  type CardType = Visa | Mastercard
-  type Currency = EUR | USD
-
-  type Payment {
-      amount: PaymentAmount,
-      currency: Currency,
-      cardType: CardType
-  }
-
-
-  val payment: Payment = (amount: 50.5, currency: Currency.USD, cardType: CardType.Mastercard)
-
-  // No Global State
-
-  val someValue = 10
-  func calculate() {
-      val x = someValue
-  }
-
-  > error: global state found for variable someValue. variable scope should be defined inside a function
-
-
-
-  // Asynchrounous operations
-
-  async {
-    dosomthing in a different thread / process
-  }
-
-  // function to evaluate some result in future
-  func doSomething() async {
-    ...
-  }
-  
-  // structured concurrency pattern  
-  async {
-    val result = await doSomething()
-  }
-  
-  // multiple async operations in parallel
-  async {
-    async val result1 = doSomething1()
-    async val result2 = doSomething2()
-    val combine = await[result1, result2]
-  }
-
-  
-  
-  //Generic functions with possible outcomes
-  func getBookingDate&lt;T&gt;(booking: Booking): Either[R&lt;T&gt;, Error] {
-    ...
-  }
-  
-  
-
-</code></pre></div></div>
-
 
 <h1 id="is-exo-right-for-me">Is ActLang Right for Me?</h1>
 
 <ol>
-  <li>Are you want to create highly distributed applications without worrying about concurrency</li>
+  <li>Are you want to create highly distributed AI-native applications without worrying about concurrency and agent-to-agent communication</li>
   <li>Are you targeting high performance systems</li>
-  <li>Do you need a language to simplify writing complex problems. Integrated with all the modern features of functional stuff</li>
+  <li>Do you need an AI Framework to simplify writing complex problems. Integrated with all the modern features of orchestration and multi-agents patterns</li>
 </ol>
 
 <p>If you answered “yes!”, then ActLang might be right for you!</br>
@@ -214,20 +80,9 @@ In particular, if you want to work with a large number of independent process un
 </p>
 
 </br>
-  <p>Advantages Of Functional Programming:</br>
-Here are some of the benefits of functional programming that are admired by developers. </br>
-<ol>
-  <li>Shorter code</li>
-<li>Easy debugging</li>
-<li>Modular</li>
-<li>Parallel programming</li>
-<li>Increased maintainability</li>
-<li>Code readability</li>
-  </ol>
+ 
 
-  </p>
-
-Many functional programming languages are in use today in many industries. Actlang purpose is to make this paradigm easier for distributed computing as a general programming language from students to professionals
+Many AI Agent Frameworks are in use today in many industries. Actlang purpose is to make this paradigm easier for distributed cloud computing from students to professionals
 
 
 </p>
@@ -239,10 +94,10 @@ are some of the things we’d like to add / Act (or perhaps continue to learn & 
 
 <ol>
   <li>
-    Efficient and simpler way to write multithreaded & non-blocking code.
+    Efficient and simpler way to write agentic multithreaded & non-blocking code.
   </li>
-  <li>Most appreciateable features from other programming lanaugaes that help us to write better code</li>
-  <li>Minimize the compile time, in parallel to show human-readable errors for faster debugging </li>
+  <li>Most appreciateable features from other frameworks (both pros & cons) that help us to write better code</li>
+ 
 </ol>
 
 <h1 id="publications--learning-more">Publications &amp; Learning More</h1>
@@ -254,7 +109,7 @@ are some of the things we’d like to add / Act (or perhaps continue to learn & 
       </section>
 
       <footer>
-        <p><small>Soon Hosted on <a href="https://github.com/actlang">GitHub</a> </br> </small>ActorBeam Community</small></p>
+        <p><small>Soon Hosted on <a href="https://github.com/actlang">GitHub</a> </br> </small>AICampus Community</small></p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
